@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="img col-lg-3 col-12 ">
                                 <div class="col-12 mb-3">
-                                    <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture mb-3 " style="width:150px">
+                                    <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture mb-3 img-profile " style="width:150px">
                                 </div>
                                 <div class="col-12 ">
                                     <input type="file" class="form-control">
@@ -98,3 +98,10 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+    traerDatosProfile()
+
+</script>

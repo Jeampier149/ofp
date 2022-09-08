@@ -174,6 +174,21 @@
             return $arreglo;
          //   conexionBD::cerrar_conexion();
         }
+        public function Traer_Datos_Usuario($id){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_CARGAR_DATA_USUARIO(?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query -> bindParam(1,$id);
+            $query->execute();
+            $resultado = $query->fetchAll();
+            foreach($resultado as $resp){
+                $arreglo[]=$resp;
+            }
+            return $arreglo;
+         //   conexionBD::cerrar_conexion();
+        }
+
 
     }
 

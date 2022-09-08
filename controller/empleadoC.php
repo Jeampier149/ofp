@@ -25,8 +25,20 @@
         $movil = strtoupper(htmlspecialchars($_POST['movil'],ENT_QUOTES,'UTF-8'));
         $dire = strtoupper(htmlspecialchars($_POST['dire'],ENT_QUOTES,'UTF-8'));
         $email = strtoupper(htmlspecialchars($_POST['email'],ENT_QUOTES,'UTF-8'));   
-        $consulta = $MU->Registrar_Empleado($nro,$nom,$apepa,$apema,$fnac,$movil,$dire,$email);
-        echo $consulta;
+        $nombre_archivo=htmlspecialchars($_POST['nombre_archivo'],ENT_QUOTES,'UTF-8');
+       
+        if(is_array($_FILES) && count($_FILES)>0){
+            if(move_uploaded_file($_FILES['foto']['tmp_name'],"../assets/img/empleados/".$nombre_archivo)){
+                $ruta="assets/img/empleados/".$nombre_archivo;
+                $consulta = $MU->Registrar_Empleado($nro,$nom,$apepa,$apema,$fnac,$movil,$dire,$email,$ruta);
+                echo $consulta;
+            }else{
+                echo 0;
+            }
+        }else{
+            echo 0;
+        }
+    
       break;
       case 'modificar':
         $id = strtoupper(htmlspecialchars($_POST['id'],ENT_QUOTES,'UTF-8'));

@@ -68,24 +68,30 @@ switch ($_REQUEST['tipo']) {
     case 'cargar_select_emp':
         $consulta = $MU->Cargara_Select_Empleado();
         echo json_encode($consulta);
-    
+
 
         break;
     case 'cargar_select_area':
         $consulta = $MU->Cargara_Select_Area();
         echo json_encode($consulta);
-    
+
         break;
     case 'traer_data_segu':
-        $numero = strtoupper(htmlspecialchars($_POST['numero'],ENT_QUOTES,'UTF-8')); 
-        $dni = strtoupper(htmlspecialchars($_POST['dni'],ENT_QUOTES,'UTF-8')); 
-        $consulta = $MU->Cargar_Select_Datos_Seguimiento($numero,$dni);
+        $numero = strtoupper(htmlspecialchars($_POST['numero'], ENT_QUOTES, 'UTF-8'));
+        $dni = strtoupper(htmlspecialchars($_POST['dni'], ENT_QUOTES, 'UTF-8'));
+        $consulta = $MU->Cargar_Select_Datos_Seguimiento($numero, $dni);
         echo json_encode($consulta);
         break;
     case 'traer_data_detalle_segu':
-        $codigo = strtoupper(htmlspecialchars($_POST['codigo'],ENT_QUOTES,'UTF-8')); 
+        $codigo = strtoupper(htmlspecialchars($_POST['codigo'], ENT_QUOTES, 'UTF-8'));
         $consulta = $MU->Traer_Datos_Detalle_Seguimiento($codigo);
         echo json_encode($consulta);
-    
+
+        break;
+    case 'traer_data_usuario':
+        $id=htmlspecialchars($_POST['usuario'],ENT_QUOTES,'UTF-8');
+        $consulta=$MU->Traer_Datos_Usuario($id);
+        echo json_encode($consulta);
+
         break;
 }

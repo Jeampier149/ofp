@@ -440,3 +440,45 @@ function Traer_Datos_Seguimiento(){
         }
     })
 }
+
+function traerDatosUsuario() {
+    let usuario = $("#txtprincipalid").val();
+    $.ajax({
+        "url": '../controller/usuarioC.php?tipo=traer_data_usuario',
+        type: "POST",
+        data: {
+            usuario: usuario
+
+        }
+    }).done(function (response) {
+        var datos = JSON.parse(response);
+        console.log(datos)
+        if (datos.length > 0) {
+            $('.user-name').html(datos[0][1])
+            $('#img_inicio').attr("src","../"+datos[0][9]);
+
+        }
+
+    })
+}
+
+function traerDatosProfile() {
+    let usuario = $("#txtprincipalid").val();
+
+    $.ajax({
+        "url": '../controller/usuarioC.php?tipo=traer_data_usuario',
+        type: "POST",
+        data: {
+            usuario: usuario
+
+        }
+    }).done(function (response) {
+        var datos = JSON.parse(response);
+        console.log(datos)
+        if (datos.length > 0) {
+            $('.img-profile').attr("src","../"+datos[0][9]);
+          
+        }
+
+    })
+}

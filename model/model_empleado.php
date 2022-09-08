@@ -18,9 +18,9 @@
             conexionBD::cerrar_conexion();
         }
 
-        public function Registrar_Empleado($nro,$nom,$apepa,$apema,$fnac,$movil,$dire,$email){
+        public function Registrar_Empleado($nro,$nom,$apepa,$apema,$fnac,$movil,$dire,$email,$ruta){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_REGISTRAR_EMPLEADO(?,?,?,?,?,?,?,?)";
+            $sql = "CALL SP_REGISTRAR_EMPLEADO(?,?,?,?,?,?,?,?,?)";
             $arreglo = array();
             $query  = $c->prepare($sql);
             $query -> bindParam(1,$nro);
@@ -31,6 +31,7 @@
             $query -> bindParam(6,$movil);
             $query -> bindParam(7,$dire);
             $query -> bindParam(8,$email);
+            $query -> bindParam(9,$ruta);
             $query->execute();
             if($row = $query->fetchColumn()){
                     return $row;

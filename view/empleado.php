@@ -1,44 +1,43 @@
-
-        <div class="card-header">
-            <h4>EMPLEADOS</h4>
-        </div>
-        <div class="card-body">
-            <div class="contenido mb-4">
-                <div class="row">
-                    <div class="col-md-9 col-12 mb-2 mb-md-0">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control global_filter" id="global_filter">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                            </div>
+<div class="card-header">
+    <h4>EMPLEADOS</h4>
+</div>
+<div class="card-body">
+    <div class="contenido mb-4">
+        <div class="row">
+            <div class="col-md-9 col-12 mb-2 mb-md-0">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control global_filter" id="global_filter">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-search"></i>
                         </div>
                     </div>
-                    <div class="col-md-3 col-12">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="AbrirRegistro()">Nuevo</button>
-                    </div>
                 </div>
-                <table id="tabla_empleado" class="display responsive  table" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Foto</th>
-                            <th>DNI</th>
-                            <th>Empleado</th>
-                            <th>Movil</th>
-                            <th>Email</th>
-                            <th>Dirección</th>
-                            <th>Estatus</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+            </div>
+            <div class="col-md-3 col-12">
+                <button class="btn btn-primary" style="width: 100%;" onclick="AbrirRegistro()">Nuevo</button>
             </div>
         </div>
+        <table id="tabla_empleado" class="display responsive  table" style="width:100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Foto</th>
+                    <th>DNI</th>
+                    <th>Empleado</th>
+                    <th>Movil</th>
+                    <th>Email</th>
+                    <th>Dirección</th>
+                    <th>Estatus</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
+</div>
+</div>
 </section>
 <script src="../js/console_empleado.js"></script>
 <!-- Modal -->
@@ -52,64 +51,66 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form action="" method="post" enctype="multipart/form-data" onsubmit="return false">
-                <div class="row">
-                <div class="row">
-                    <div class="col-6">
-                        <label for="">Nro Documento</label>
-                        <input type="text" class="form-control" id="txt_nro" onkeypress="return soloNumeros(event)">
-                    </div>
-                    <div class="col-6">
-                        <label for="">Nombres</label>
-                        <input type="text" class="form-control" id="txt_nom" >
-                    </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-6">
-                            <label for="">Apellido Paterno</label>
-                            <input type="text" class="form-control" id="txt_apepa">
+                <form action="" method="post" enctype="multipart/form-data" onsubmit="return false">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="">Nro Documento</label>
+                                <input type="text" class="form-control" id="txt_nro">
+                            </div>
+                            <div class="col-6">
+                                <label for="">Nombres</label>
+                                <input type="text" class="form-control" id="txt_nom">
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <label for="">Apellido Materno</label>
-                            <input type="text" class="form-control" id="txt_apema" >
+                        <div class="row ">
+                            <div class="col-6">
+                                <label for="">Apellido Paterno</label>
+                                <input type="text" class="form-control" id="txt_apepa">
+                            </div>
+                            <div class="col-6">
+                                <label for="">Apellido Materno</label>
+                                <input type="text" class="form-control" id="txt_apema">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row w-100">
+                        <div class="row  w-100">
                             <div class=" col-6">
                                 <label>Fecha de nacimiento</label>
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" id="txt_fnac">
                             </div>
                             <div class="col-6">
                                 <label for="">Movil</label>
                                 <input type="text" class="form-control" id="txt_movil">
                             </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="">Dirección</label>
-                            <input type="text" class="form-control" id="txt_dire">
                         </div>
-                        <div class="col-6">
-                            <label for="">Email</label>
-                            <input type="text" class="form-control" id="txt_email">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="">Dirección</label>
+                                <input type="text" class="form-control" id="txt_dire">
+                            </div>
+                            <div class="col-6">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" id="txt_email">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label for="">Subir Avatar</label><br>
-                            <input type="file" id="imagen" accept="image/*" width="100%">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="">Subir Avatar</label><br>
+                                <input type="file" id="imagen" accept="image/*" width="100%">
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" onclick="Registrar_Empleado()">REGISTRAR</button>
             </div>
-    
+
         </div>
-        </form>
+
     </div>
 </div>
 

@@ -115,8 +115,8 @@ if (!isset($_SESSION['S_ID'])) {
             </div>
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-              <div class="d-sm-none d-lg-inline-block">Usuario</div>
+              <img alt="image" src="" class=" inicio-img mr-1" id="img_inicio">
+              <div class="d-sm-none d-lg-inline-block user-name">Usuario</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Tiempo de Sesion</div>
@@ -243,13 +243,12 @@ if (!isset($_SESSION['S_ID'])) {
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.5/b-2.2.2/b-html5-2.2.2/r-2.2.9/sl-1.3.4/datatables.min.js"></script>
+  <script src="../js/console_usuario.js"></script>
   <script>
     function cargar_contenido(contenedor, contenido) {
       $("#" + contenedor).load(contenido);
-     
-
     }
-  
+    traerDatosUsuario()
   </script>
 
 

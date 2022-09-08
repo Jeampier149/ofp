@@ -14,7 +14,7 @@ function listar_empleado(){
             {"defaultContent":""},
             {"data":"empl_fotoperfil",
                 render: function(data,type,row){
-                        return '<img src="../'+data+'" class="img-responsive" style="width:40px">';
+                        return '<img src="../'+data+'" class="img-circle img-fluid" >';
                 }   
             },
             {"data":"emple_nrodocumento"},
@@ -109,45 +109,47 @@ function Registrar_Empleado(){
     var nombre_archivo = "IMG" + f.getDate() + "" + (f.getMonth() + 1) + "" + f.getFullYear() + "" + f.getHours() + "" + f.getMinutes() + "" + f.getSeconds() + "." + extension;
     var formData = new FormData();
     var foto = $("#imagen")[0].files[0];
-    formData.append('usuario', nro)
-    formData.append('password', nom)
-    formData.append('email', apepa)
-    formData.append('rol', apema)
-    formData.append('persona', fnac)
-    formData.append('persona', movil)
-    formData.append('persona', dire)
-    formData.append('persona', email)
+    formData.append('nro', nro)
+    formData.append('nom', nom)
+    formData.append('apepa', apepa)
+    formData.append('apema', apema)
+    formData.append('fnac', fnac)
+    formData.append('movil', movil)
+    formData.append('dire', dire)
+    formData.append('email', email)
     formData.append('foto', foto)
     formData.append('nombre_archivo', nombre_archivo)
 
     $.ajax({
         "url":"../controller/empleadoC.php?tipo=registro",
         type:'POST',
-        data:{
-            formData
-        }
-    }).done(function(resp){
-        if(resp>0){
-            if(resp==1){
-                Swal.fire("Mensaje de Confirmacion","Nuevo Empleado Registrado","success").then((value)=>{
-                    document.getElementById('txt_nro').value="";
-                    document.getElementById('txt_nom').value="";
-                    document.getElementById('txt_apepa').value="";
-                    document.getElementById('txt_apema').value="";
-                    document.getElementById('txt_fnac').value="";
-                    document.getElementById('txt_movil').value="";
-                    document.getElementById('txt_dire').value="";
-                    document.getElementById('txt_email').value="";
-                    tbl_empleado.ajax.reload();
-                    $("#modal_registro").modal('hide');
-                });
-            }else{
-                Swal.fire("Mensaje de Advertencia","El Nro documento ingresado ya se encuentra en la base de datos","warning");
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (resp) {
+            if (resp > 0) {
+                if (resp == 1) {
+                    Swal.fire("Mensaje de Confirmacion","Nuevo Empleado Registrado","success")
+                        document.getElementById('txt_nro').value="";
+                        document.getElementById('txt_nom').value="";
+                        document.getElementById('txt_apepa').value="";
+                        document.getElementById('txt_apema').value="";
+                        document.getElementById('txt_fnac').value="";
+                        document.getElementById('txt_movil').value="";
+                        document.getElementById('txt_dire').value="";
+                        document.getElementById('txt_email').value="";
+                        tbl_empleado.ajax.reload();
+                        $("#modal_registro").modal('hide');
+                } else {
+                    Swal.fire("Mensaje de Advertencia","El Nro documento ingresado ya se encuentra en la base de datos","warning");
+                }
+            } else {
+                return Swal.fire("Mensaje de Error","No se completo el registro","error");    
             }
-        }else{
-            return Swal.fire("Mensaje de Error","No se completo el registro","error");            
-        }
+            }
+           
     })
+    return false;
 }
 
 function Modificar_Empleado(){
