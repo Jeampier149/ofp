@@ -51,9 +51,9 @@
 
 
 
-        public function Listar_Tramite(){
+        public function Listar_Tramite($inicio,$fin){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_LISTAR_TRAMITE()";
+            $sql = "CALL SP_LISTAR_TRAMITE('$inicio','$fin')";
             $arreglo = array();
             $query  = $c->prepare($sql);
             $query->execute();

@@ -3660,6 +3660,11 @@ body.layout-3 .main-wrapper {
   background-color: #464555!important;
 }
 
+.badge-warning{
+  background-color: #3E908D!important;
+  color:white;
+}
+
 .danger ,.contra {
   color:white
 }

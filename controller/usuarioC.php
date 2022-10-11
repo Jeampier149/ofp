@@ -18,9 +18,11 @@ switch ($_REQUEST['tipo']) {
         $idusuario = htmlspecialchars($_POST['idusuario'], ENT_QUOTES, 'UTF-8');
         $usuario = htmlspecialchars($_POST['usuario'], ENT_QUOTES, 'UTF-8');
         $rol = htmlspecialchars($_POST['rol'], ENT_QUOTES, 'UTF-8');
+        $area = htmlspecialchars($_POST['area'], ENT_QUOTES, 'UTF-8');
         $_SESSION['S_ID'] = $idusuario;
         $_SESSION['S_USU'] = $usuario;
         $_SESSION['S_ROL'] = $rol;
+        $_SESSION['S_AREA'] = $area;
         break;
 
     case 'listar':
@@ -93,5 +95,10 @@ switch ($_REQUEST['tipo']) {
         $consulta=$MU->Traer_Datos_Usuario($id);
         echo json_encode($consulta);
 
+        break;
+    case 'cerrar_sesion':
+        session_start();
+        session_destroy();
+        header('Location: ../index.php');
         break;
 }

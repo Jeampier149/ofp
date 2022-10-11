@@ -3,7 +3,9 @@ require '../model/model_tramite.php';
 $MU = new Modelo_Tramite(); //Instaciamos
 switch ($_REQUEST['tipo']) {
     case 'listar':
-        $consulta = $MU->Listar_Tramite();
+        $inicio=$_POST['fechainicio'];
+        $fin=$_POST['fechafin'];
+        $consulta = $MU->Listar_Tramite($inicio,$fin);
         if ($consulta) {
             echo json_encode($consulta);
         } else {
@@ -37,8 +39,8 @@ switch ($_REQUEST['tipo']) {
         $ard = strtoupper(htmlspecialchars($_POST['ard'], ENT_QUOTES, 'UTF-8'));
         $tip = strtoupper(htmlspecialchars($_POST['tip'], ENT_QUOTES, 'UTF-8'));
         $ndo = strtoupper(htmlspecialchars($_POST['ndo'], ENT_QUOTES, 'UTF-8'));
-        $asu = strtoupper($_POST['asu']);
-        $nombrearchivo = strtoupper(htmlspecialchars($_POST['nombrearchivo'], ENT_QUOTES, 'UTF-8'));
+        $asu = $_POST['asu'];
+        $nombrearchivo = strtoupper(htmlentities($_POST['nombrearchivo'], ENT_QUOTES, 'UTF-8'));
         $fol = strtoupper(htmlspecialchars($_POST['fol'], ENT_QUOTES, 'UTF-8'));
         $idusu = strtoupper(htmlspecialchars($_POST['idusu'], ENT_QUOTES, 'UTF-8'));
 

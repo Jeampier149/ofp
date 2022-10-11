@@ -46,12 +46,14 @@
 
 
 
-        public function Listar_Tramite($idusuario){
+        public function Listar_Tramite($idusuario,$inicio,$fin){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_LISTAR_TRAMITE_AREA(?)";
+            $sql = "CALL SP_LISTAR_TRAMITE_AREA(?,?,?)";
             $arreglo = array();
             $query  = $c->prepare($sql);
             $query -> bindParam(1,$idusuario);
+            $query -> bindParam(2,$inicio);
+            $query -> bindParam(3,$fin);
             $query->execute();
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach($resultado as $resp){

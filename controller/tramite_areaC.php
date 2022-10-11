@@ -4,8 +4,10 @@
     
     switch ($_REQUEST['tipo']) {
         case 'listar':
+            $inicio=$_POST['fechainicio'];
+            $fin=$_POST['fechafin'];
             $idusuario = strtoupper(htmlspecialchars($_POST['idusuario'],ENT_QUOTES,'UTF-8'));
-            $consulta = $MU->Listar_Tramite($idusuario);
+            $consulta = $MU->Listar_Tramite($idusuario,$inicio,$fin);
             if($consulta){
                 echo json_encode($consulta);
             }else{

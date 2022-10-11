@@ -1,5 +1,17 @@
+function fechadefault() {
+    n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    if (d < 10) { d = '0' + d }
+    if (m < 10) { m = '0' + m }
+    document.getElementById("fecha_inicio").value = y + "-" + m + "-" + d;
+    document.getElementById("fecha_fin").value = y + "-" + m + "-" + d;
+}
 var  tbl_tramite;
 function listar_tramite(){
+    var fechainicio = $('#fecha_inicio').val()
+    var fechafin = $('#fecha_fin').val()
     tbl_tramite = $("#tabla_tramite").DataTable({
         "ordering":true,   
         "bLengthChange":true,
@@ -12,7 +24,11 @@ function listar_tramite(){
         "autoWidth": false,
         "ajax":{
             "url":"../controller/tramiteC.php?tipo=listar",
-            type:'POST'
+            type:'POST',
+            data: {
+                fechainicio: fechainicio,
+                fechafin: fechafin
+            }
         },
         "targets": '_all',
         "render":$.fn.dataTable.render.text(),
@@ -21,19 +37,18 @@ function listar_tramite(){
             {"data":"documento_id"},
             {"data":"doc_nrodocumento"},
             {"data":"tipodo_descripcion"},
-            {"data":"REMITENTE"},
-            {"defaultContent":"<button class='mas btn btn-danger btn-sm'><i class='fa fa-search'></i></button>"},
-            {"defaultContent":"<button class='seguimiento btn btn-success btn-sm'><i class='fa fa-search'></i></button>"},
             {"data":"origen"},
             {"data":"destino"},
+            {"defaultContent":`<button class='mas btn btn-primary btn-sm'><i class="fas fa-calendar-plus"></i></button>`},
+            {"defaultContent":"<button class='seguimiento btn btn-success btn-sm'><i class='fa fa-search'></i></button>"},
             {"data":"doc_estatus",
             render: function(data,type,row){
                         if(data=='PENDIENTE'){
-                        return '<span class="badge bg-warning">PENDIENTE</span>';
+                            return '<span class="badge badge-warning">Pendiente</span>';
                         }else if(data=='RECHAZADO'){
-                        return '<span class="badge bg-danger">RECHAZADO</span>';
+                            return '<span class="badge badge-danger">Rechazado</span>';
                         }else{
-                            return '<span class="badge bg-success">FINALIZADO</span>';
+                            return '<span class="badge badge-success">Terminado</span>';
                         }
                 }   
             },
@@ -85,8 +100,9 @@ $('#tabla_tramite').on('click','.mas',function(){
 	if(tbl_tramite.row(this).child.isShown()){
 		var data = tbl_tramite.row(this).data();
 	}//Permite llevar los datos cuando es tamaño celular y usas el responsive de datatable
-    $("#modal_mas").modal('show');
-    document.getElementById('lbl_titulo_datos').innerHTML='DATOS DEL TRAMITE '+data.documento_id;
+    $("#modal_mdatos").modal('show');
+    
+   /* document.getElementById('lbl_titulo_datos').innerHTML='DATOS DEL TRAMITE '+data.documento_id;
     document.getElementById('txt_ndocumento').value=data.doc_nrodocumento;
     document.getElementById('txt_folio').value=data.doc_folio;
     document.getElementById('txt_asunto').value=data.doc_asunto;
@@ -112,7 +128,7 @@ $('#tabla_tramite').on('click','.mas',function(){
     if(data.doc_representacion=="Persona Jurídica"){
         $("#rad_presentacion3").prop('checked',true);
     }
-
+*/
 
 })
 

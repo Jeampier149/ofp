@@ -2,8 +2,6 @@ function Iniciar_Sesion(){
 
     let usu = document.getElementById('txt_usuario').value;
     let con = document.getElementById('txt_contra').value;
-    console.log(usu)
-    console.log(con)
     if(usu.length==0 || con.length==0){
         return Swal.fire({
             icon: 'warning',
@@ -20,10 +18,8 @@ function Iniciar_Sesion(){
             u:usu,
             c:con,          
         }
-    }).done(function(resp){
-        console.log(resp)
-        let data = JSON.parse(resp);
-        console.log(data)
+    }).done(function(resp){     
+        let data = JSON.parse(resp);  
         if(data.length>0){
             if(data[0][7]=="INACTIVO"){
                 return Swal.fire({
@@ -39,7 +35,9 @@ function Iniciar_Sesion(){
                 data:{
                     idusuario:data[0][0],
                     usuario:data[0][1],
-                    rol:data[0][9]
+                    rol:data[0][9],
+                    area:data[0][8],
+
                 }
             }).done(function(r){
                 let timerInterval
@@ -452,7 +450,6 @@ function traerDatosUsuario() {
         }
     }).done(function (response) {
         var datos = JSON.parse(response);
-        console.log(datos)
         if (datos.length > 0) {
             $('.user-name').html(datos[0][1])
             $('#img_inicio').attr("src","../"+datos[0][9]);
@@ -474,7 +471,7 @@ function traerDatosProfile() {
         }
     }).done(function (response) {
         var datos = JSON.parse(response);
-        console.log(datos)
+   
         if (datos.length > 0) {
             $('.img-profile').attr("src","../"+datos[0][9]);
           

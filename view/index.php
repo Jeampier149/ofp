@@ -24,7 +24,7 @@ if (!isset($_SESSION['S_ID'])) {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -48,6 +48,7 @@ if (!isset($_SESSION['S_ID'])) {
           <input type="text" id="txtprincipalid" value="<?php echo $_SESSION['S_ID']; ?>" hidden>
           <input type="text" id="txtprincipalusu" value="<?php echo $_SESSION['S_USU']; ?>" hidden>
           <input type="text" id="txtprincipalrol" value="<?php echo $_SESSION['S_ROL']; ?>" hidden>
+          <input type="text" id="txtprincipalarea" value="<?php echo $_SESSION['S_AREA']; ?>"hidden >
           <!-- notificaciones -->
           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep" aria-expanded="false"><i class="far fa-bell"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -120,14 +121,14 @@ if (!isset($_SESSION['S_ID'])) {
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Tiempo de Sesion</div>
-              <a onclick="cargar_contenido('contenido_principal','profile.php')"class="dropdown-item has-icon">
+              <a onclick="cargar_contenido('contenido_principal','profile.php')" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Perfil
               </a>
               <a href="" class="dropdown-item has-icon">
                 <i class="fas fa-cog"></i> Configuracion
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item has-icon text-danger">
+              <a href="../controller/usuarioC.php?tipo=cerrar_sesion" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Salir
               </a>
             </div>
@@ -148,24 +149,29 @@ if (!isset($_SESSION['S_ID'])) {
               <a href="index.html" class="nav-link "><i class="fas fa-fire"></i><span>INICIO</span></a>
             </li>
             <li class="menu-header">Secciones</li>
-            <li class="dropdown">
-              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                <span>Remuneraciones</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','portal.html')">Bandeja de documentos</a></li>
-                <li><a class="nav-link">Portal</a></li>
-                <li><a class="nav-link">Resumen</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                <span>Programacion</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link">Bandeja de documentos</a></li>
-                <li><a class="nav-link">Transparent Sidebar</a></li>
-                <li><a class="nav-link">Top Navigation</a></li>
-              </ul>
-            </li>
+            <?php if ($_SESSION['S_AREA'] == 6) { ?>
+              <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                  <span>Remuneraciones</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','portal.html')">Bandeja de documentos</a></li>
+                  <li><a class="nav-link">Portal</a></li>
+                  <li><a class="nav-link">Resumen</a></li>
+                </ul>
+              </li>
+            <?php } ?>
+            <?php if ($_SESSION['S_AREA'] == '4') { ?>
+              <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                  <span>Programacion</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link">Bandeja de documentos</a></li>
+                  <li><a class="nav-link">Transparent Sidebar</a></li>
+                  <li><a class="nav-link">Top Navigation</a></li>
+                </ul>
+              </li>
+            <?php } ?>
+            <?php if ($_SESSION['S_AREA'] == 2) { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                 <span>Oficina Administrativa</span></a>
@@ -175,15 +181,21 @@ if (!isset($_SESSION['S_ID'])) {
                 <li><a class="nav-link">Top Navigation</a></li>
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                <span>Bienestar</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="layout-default.html">Bandeja de documentos</a></li>
-                <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-              </ul>
-            </li>
+            <?php } ?>
+
+            <?php if ($_SESSION['S_AREA'] == 1) { ?>
+              <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                  <span>Bienestar</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_area.php')">Bandeja de documentos</a></li>
+                  <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+                  <li><a class="nav-link" href="layout-top-navigation.html">Subsidios</a></li>
+                </ul>
+              </li>
+            <?php } ?>
+
+            <?php if ($_SESSION['S_AREA'] == 5) { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                 <span>Seguridad y Salud</span></a>
@@ -193,15 +205,16 @@ if (!isset($_SESSION['S_ID'])) {
                 <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
               </ul>
             </li>
-            <?php if($_SESSION['S_ROL']=='Administrador') {?>
-            <li class="menu-header">Mantenimiento</li>
-            <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','areas.php')"><i class="fas fa-cube"></i> <span>Areas</span></a></li>
-            <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','usuarios.php')"><i class="fas fa-users"></i> <span>Usuarios</span></a></li>
-            <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','tipo_documento.php')"><i class="far fa-file"></i> <span> Tipo de Documentos</span></a></li>
-            <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite.php')"><i class="fas fa-file-alt"></i> <span>Tramites</span></a></li>
-            <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','empleado.php')"><i class="far fa-address-card"></i> <span>Empleados</span></a></li>
-            <li class="menu-header">Reportes</li>
-            <?php }?>
+            <?php } ?>
+            <?php if ($_SESSION['S_ROL'] == 'Administrador') { ?>
+              <li class="menu-header">Mantenimiento</li>
+              <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','areas.php')"><i class="fas fa-cube"></i> <span>Areas</span></a></li>
+              <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','usuarios.php')"><i class="fas fa-users"></i> <span>Usuarios</span></a></li>
+              <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','tipo_documento.php')"><i class="far fa-file"></i> <span> Tipo de Documentos</span></a></li>
+              <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite.php')"><i class="fas fa-file-alt"></i> <span>Tramites</span></a></li>
+              <li class=""><a class="nav-link" onclick="cargar_contenido('contenido_principal','empleado.php')"><i class="far fa-address-card"></i> <span>Empleados</span></a></li>
+              <li class="menu-header">Reportes</li>
+            <?php } ?>
           </ul>
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="" class="btn btn-primary btn-lg btn-block btn-icon-split">
