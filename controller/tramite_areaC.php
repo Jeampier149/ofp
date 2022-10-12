@@ -19,6 +19,22 @@
                 }';
             }
             break;
+            case 'listar_enviados':
+                $idarea=$_POST['idarea'];
+                $inicio=$_POST['fechainicio'];
+                $fin=$_POST['fechafin'];
+                $consulta = $MU->Listar_Tramite_Enviado($idarea,$inicio,$fin);
+                if($consulta){
+                    echo json_encode($consulta);
+                }else{
+                    echo '{
+                        "sEcho": 1,
+                        "iTotalRecords": "0",
+                        "iTotalDisplayRecords": "0",
+                        "aaData": []
+                    }';
+                }
+                break;
     
         case 'registro':
             $iddo = strtoupper(htmlspecialchars($_POST['iddo'],ENT_QUOTES,'UTF-8'));

@@ -264,13 +264,9 @@ function Registrar_Tramite(){
     let apm = document.getElementById('txt_apemat').value;
     let cel = document.getElementById('txt_celular').value;
     let ema = document.getElementById('txt_email').value;
+    var abrev = $("#select_area_p option:selected").text();
 
     let idusu = document.getElementById('txtprincipalid').value;
- 
-   
-
-
-
     if(arc.length==0){
         return Swal.fire("Mensaje de Advertencia","Seleccine algun tipo de documento","warning");
     }
@@ -279,7 +275,7 @@ function Registrar_Tramite(){
     let nombrearchivo = "";
     let f =  new Date();
     if(arc.length>0){
-        nombrearchivo="ARCH"+f.getDate()+""+(f.getMonth()+1)+""+f.getFullYear()+""+f.getHours()+""+f.getMilliseconds()+"."+extension;
+        nombrearchivo=abrev+f.getDate()+""+(f.getMonth()+1)+""+f.getFullYear()+""+f.getHours()+""+f.getMilliseconds()+"."+extension;
     }
     if(dni.length==0 || nom.length==0 || apt.length==0 || apm.length==0 || cel.length==0 || ema.length==0 ){
         return Swal.fire("Mensaje de Advertencia","Llene todos los datos del remitente","warning");
@@ -433,9 +429,9 @@ function listar_seguimiento_tramite(id){
             
         ],
   
-        "language":idioma_espanol,
         select: true
     });
+   
 }
 
 

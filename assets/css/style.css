@@ -3681,7 +3681,7 @@ body.layout-3 .main-wrapper {
 .rd{
   border-radius: 10px!important;
 }
-#tabla_tramite_filter{
+#tabla_tramite_filter,#tabla_tramite_enviado_filter,#tabla_scan_filter{
   display: none;
 }
 @media (max-width: 800px) {

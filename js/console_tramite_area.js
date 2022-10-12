@@ -38,10 +38,11 @@ function listar_tramite() {
             { "data": "documento_id" },
             { "data": "tipodo_descripcion" },
             { "data": "REMITENTE" },
-            {"defaultContent":`<button class='mas btn btn-primary btn-sm'><i class="fas fa-calendar-plus"></i></button>`},
-            {"defaultContent":"<button class='seguimiento btn btn-success btn-sm'><i class='fa fa-search'></i></button>"},
             { "data": "origen" },
             { "data": "destino" },
+            { "defaultContent": `<button class='mas btn btn-primary btn-sm'><i class="fas fa-calendar-plus"></i></button>` },
+            { "defaultContent": "<button class='seguimiento btn btn-success btn-sm'><i class='fa fa-search'></i></button>" },
+
             {
                 "data": "doc_estatus",
                 render: function (data, type, row) {
@@ -69,6 +70,12 @@ function listar_tramite() {
 
 
         select: true
+    });
+    $('input.global_filter').on('keyup click', function () {
+        filterGlobal();
+    });
+    $('input.column_filter').on('keyup click', function () {
+        filterColumn($(this).parents('tr').attr('data-column'));
     });
 }
 
@@ -257,28 +264,8 @@ function Cargar_Select_Area_Destino(id) {
 }
 
 function Registrar_Tramite() {
-    //DATOS DEL REMITENTE
-    let dni = document.getElementById('txt_dni').value;
-    let nom = document.getElementById('txt_nom').value;
-    let apt = document.getElementById('txt_apepat').value;
-    let apm = document.getElementById('txt_apemat').value;
-    let cel = document.getElementById('txt_celular').value;
-    let ema = document.getElementById('txt_email').value;
-    let dir = document.getElementById('txt_dire').value;
-    let idusu = document.getElementById('txtprincipalid').value;
-
-    let presentacion = document.getElementsByName("r1");
-    let vpresentacion = "";
-    for (let i = 0; i < presentacion.length; i++) {
-        if (presentacion[i].checked) {
-            vpresentacion = presentacion[i].value;
-        }
-
-    }
-    let ruc = document.getElementById('txt_ruc').value;
-    let raz = document.getElementById('txt_razon').value;
-
     //DATOS DOCUMENTO 
+
     let arp = document.getElementById('select_area_p').value;
     let ard = document.getElementById('select_area_d').value;
     let tip = document.getElementById('select_tipo').value;
@@ -286,6 +273,18 @@ function Registrar_Tramite() {
     let asu = document.getElementById('txt_asunto').value;
     let arc = document.getElementById('txt_archivo').value;
     let fol = document.getElementById('txt_folio').value;
+
+    console.log(asu)
+
+    //DATOS DEL REMITENTE
+    let dni = document.getElementById('txt_dni').value;
+    let nom = document.getElementById('txt_nom').value;
+    let apt = document.getElementById('txt_apepat').value;
+    let apm = document.getElementById('txt_apemat').value;
+    let cel = document.getElementById('txt_celular').value;
+    let ema = document.getElementById('txt_email').value;
+
+    let idusu = document.getElementById('txtprincipalid').value;
 
     if (arc.length == 0) {
         return Swal.fire("Mensaje de Advertencia", "Seleccine algun tipo de documento", "warning");
@@ -297,11 +296,11 @@ function Registrar_Tramite() {
     if (arc.length > 0) {
         nombrearchivo = "ARCH" + f.getDate() + "" + (f.getMonth() + 1) + "" + f.getFullYear() + "" + f.getHours() + "" + f.getMilliseconds() + "." + extension;
     }
-    if (dni.length == 0 || nom.length == 0 || apt.length == 0 || apm.length == 0 || cel.length == 0 || ema.length == 0 || dir.length == 0) {
+    if (dni.length == 0 || nom.length == 0 || apt.length == 0 || apm.length == 0 || cel.length == 0 || ema.length == 0) {
         return Swal.fire("Mensaje de Advertencia", "Llene todos los datos del remitente", "warning");
     }
 
-    if (arp.length == 0 || tip.length == 0 || ndo.length == 0 || asu.length == 0 || ard.length == 0 || fol.length == 0) {
+    if (arp.length == 0 || tip.length == 0 || ndo.length == 0 || asu.length == 0 || ard.length == 0) {
         return Swal.fire("Mensaje de Advertencia", "Llene todos los datos del documento", "warning");
     }
 
@@ -314,10 +313,9 @@ function Registrar_Tramite() {
     formData.append("apm", apm);
     formData.append("cel", cel);
     formData.append("ema", ema);
-    formData.append("dir", dir);
-    formData.append("vpresentacion", vpresentacion);
-    formData.append("ruc", ruc);
-    formData.append("raz", raz);
+
+
+
     //////DATOS DEL DOCUMENTO
     formData.append("arp", arp);
     formData.append("ard", ard);
@@ -338,7 +336,7 @@ function Registrar_Tramite() {
             if (resp.length > 0) {
                 Swal.fire("Mensaje de Confirmacion", "Nuevo tramite registrado codigo " + resp, "success").then((value) => {
                     window.open("MPDF/REPORTE/ticket_tramite.php?codigo=" + resp + "#zoom=100");
-                    $("#contenido_principal").load("tramite_area/view_tramite.php");
+                    $("#contenido_principal").load("tramite/view_tramite.php");
                 });
             } else {
                 Swal.fire("Mensaje de Advertencia", "El Usuairo ingresado ya se encuentra en la base de datos", "warning");
@@ -346,72 +344,6 @@ function Registrar_Tramite() {
         }
     });
     return false;
-}
-
-
-function Buscar_reniec() {
-    var dni = $("#txt_dni").val();
-    var input = document.getElementById('txt_dni');
-    if (localStorage.getItem('_token') == null) {
-        Swal.fire({
-            title: "Mensaje de Advertencia",
-            html: "<b style='color:#9B0000;font-size:20px'>Acceso no autorizado!!!</b><br><b style='font-size:14px'><b style='color:#9B0000;'>Membres&iacute;a vencida</b>, para mayor informaci&oacute;n comun&iacute;quese con su proveedor</b>",
-            imageUrl: "Vista/img/reniec.png",
-            imageWidth: 120,
-            imageHeight: 115,
-            imageAlt: "Cargando...",
-        });
-        return;
-    }
-    if (input.value.length < 8) {
-        $('#txt_dni').focus();
-        $("#txt_dni").removeClass('is-valid').addClass("is-invalid");
-        return Swal.fire("Mensaje de Advertencia", "El campo <b>dni</b>  debe tener como minimo 8 d&iacute;gitos", "warning");
-    }
-    else {
-        $("#txt_dni").removeClass('is-invalid').addClass("is-valid");
-    }
-    $.ajax({
-        url: 'https://www.reniec.softnetpe.com/api/auth/dni',
-        type: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('_token'),
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
-        },
-        data: JSON.stringify({
-            num_documento: dni,
-        })
-    })
-        .done(function (resp) {
-            if (resp['name'] != undefined) {
-                $("#txt_dni").prop('disabled', true);
-                $("#btn_reniec").prop('disabled', true);
-                $("#txt_nom").val(resp['name'].replace("'", ""));
-                $("#txt_apepat").val(resp['first_name'].replace("'", ""));
-                $("#txt_apemat").val(resp['last_name'].replace("'", ""));
-            } else {
-                $("#txt_nom").val("");
-                $("#txt_apepat").val("");
-                $("#txt_apemat").val("");
-                Swal.fire("Mensaje de Advertencia", "<b style='color:#9B0000'>Lo sentimos el dni ingresado no se encuentro en los archivos de la reniec</b>", "warning");
-            }
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            if (jqXHR.status === 0) {
-                Swal.fire("Mensaje de Error", "<b>No se pudo procesar la solicitud,</b><b style='color:#9B0000;'>SIN ACCESO A INTERNET</b>", "error");
-            }
-            if (jqXHR.status === 401) {
-                Swal.fire({
-                    title: "Mensaje de Advertencia",
-                    html: "<b style='color:#9B0000;font-size:20px'>Acceso no autorizado!!!</b><br><b style='font-size:14px'><b style='color:#9B0000;'>Membres&iacute;a vencida</b>, Para mayor informaci&oacute;n comun&iacute;quese con su proveedor</b>",
-                    imageUrl: "https://softnetpe.com/Sistema_MesaPartes_reniec/Vista/img/reniec.png",
-                    imageWidth: 120,
-                    imageHeight: 115,
-                    imageAlt: "Cargando...",
-                });
-            }
-        })
 }
 
 
@@ -465,5 +397,73 @@ $('#tabla_seguimiento').on('click', '.ver', function () {
     window.open('../' + data.mov_archivo);
 
 })
+var tbl_tramite_enviado;
+function listar_tramites_enviados() {
+    var fechainicio = $('#fecha_inicio').val()
+    var fechafin = $('#fecha_fin').val()
+    let idarea = document.getElementById('txtprincipalarea').value;
+    tbl_tramite_enviado = $("#tabla_tramite_enviado").DataTable({
+        "ordering": false,
+        "bLengthChange": true,
+        "searching": { "regex": false },
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+        "pageLength": 10,
+        "destroy": true,
+        "processing": true,
+        "responsive": true,
+        "autoWidth": false,
+        select: true,
+        "ajax": {
+            "url": "../controller/tramite_areaC.php?tipo=listar_enviados",
+            type: 'POST',
+            data: {
+                idarea,
+                fechainicio: fechainicio,
+                fechafin: fechafin
+            }
+        },
+        "columns": [
+            { "data": "documento_id" },
+            { "data": "tipodo_descripcion" },
+            { "data": "REMITENTE" },
+            { "data": "origen" },
+            { "data": "destino" },
+            { "defaultContent": `<button class='mas btn btn-primary btn-sm'><i class="fas fa-calendar-plus"></i></button>` },
+            { "defaultContent": "<button class='seguimiento btn btn-success btn-sm'><i class='fa fa-search'></i></button>" },
+
+            {
+                "data": "doc_estatus",
+                render: function (data, type, row) {
+                    if (data == 'PENDIENTE') {
+                        return '<span class="badge bg-warning">PENDIENTE</span>';
+                    } else if (data == 'RECHAZADO') {
+                        return '<span class="badge bg-danger">RECHAZADO</span>';
+                    } else {
+                        return '<span class="badge bg-success">FINALIZADO</span>';
+                    }
+                }
+            },
 
 
+        ],
+
+
+        select: true
+    });
+    $('input.global_filter').on('keyup click', function () {
+        filterGlobalEnviado();
+    });
+    $('input.column_filter').on('keyup click', function () {
+        filterColumn($(this).parents('tr').attr('data-column'));
+    });
+}
+function filterGlobalEnviado() {
+    $('#tabla_tramite_enviado').DataTable().search(
+        $('#global_filter').val(),
+    ).draw();
+}
+function filterGlobal() {
+    $('#tabla_tramite').DataTable().search(
+        $('#global_filter').val(),
+    ).draw();
+}

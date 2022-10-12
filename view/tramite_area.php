@@ -97,6 +97,41 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal_historial" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>DOCUMENTOS ENVIADOS</h5>
+                    </div>
+                    <div class="card-body">
+                    <table id="tabla_historial" class="display responsive table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Nro Doc</th>
+                            <th>Tipo Doc</th>
+                            <th>Aréa Localizado</th>
+                            <th>Estado Documento</th>
+                            <th>Documento</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                      
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>

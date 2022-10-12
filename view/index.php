@@ -154,9 +154,9 @@ if (!isset($_SESSION['S_ID'])) {
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                   <span>Remuneraciones</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','portal.html')">Bandeja de documentos</a></li>
-                  <li><a class="nav-link">Portal</a></li>
-                  <li><a class="nav-link">Resumen</a></li>
+                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_area.php')">Bandeja de documentos</a></li>
+                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_enviado.php')">Documentos Enviados</a></li>
+                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','scandoc.php')">Documentos Guardados</a></li>
                 </ul>
               </li>
             <?php } ?>
@@ -165,9 +165,9 @@ if (!isset($_SESSION['S_ID'])) {
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                   <span>Programacion</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="nav-link">Bandeja de documentos</a></li>
-                  <li><a class="nav-link">Transparent Sidebar</a></li>
-                  <li><a class="nav-link">Top Navigation</a></li>
+                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_area.php')">Bandeja de documentos</a></li>
+                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_enviado.php')">Documentos Enviados</a></li>
+                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','scandoc.php')">Documentos Guardados</a></li>
                 </ul>
               </li>
             <?php } ?>
@@ -176,9 +176,9 @@ if (!isset($_SESSION['S_ID'])) {
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                 <span>Oficina Administrativa</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link">Bandeja de documentos</a></li>
-                <li><a class="nav-link">Transparent Sidebar</a></li>
-                <li><a class="nav-link">Top Navigation</a></li>
+              <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_area.php')">Bandeja de documentos</a></li>
+              <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_enviado.php')">Documentos Enviados</a></li>
+              <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','scandoc.php')">Documentos Guardados</a></li>
               </ul>
             </li>
             <?php } ?>
@@ -189,7 +189,8 @@ if (!isset($_SESSION['S_ID'])) {
                   <span>Bienestar</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_area.php')">Bandeja de documentos</a></li>
-                  <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+                  <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_enviado.php')">Documentos Enviados</a></li>
+                  <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','scandoc.php')">Documentos Guardados</a></li>
                   <li><a class="nav-link" href="layout-top-navigation.html">Subsidios</a></li>
                 </ul>
               </li>
@@ -200,9 +201,9 @@ if (!isset($_SESSION['S_ID'])) {
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                 <span>Seguridad y Salud</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="layout-default.html">Bandeja de documentos</a></li>
-                <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+              <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_area.php')">Bandeja de documentos</a></li>
+              <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_enviado.php')">Documentos Enviados</a></li>
+              <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','scandoc.php')">Documentos Guardados</a></li>
               </ul>
             </li>
             <?php } ?>

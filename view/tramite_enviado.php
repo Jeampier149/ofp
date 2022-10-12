@@ -1,33 +1,27 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <h4>DOCUMENTOS GUARDADOS</h4>
+            <h4>DOCUMENTOS ENVIADOS</h4>
         </div>
         <div class="card-body">
             <div class="contenido mb-4">
                 <div class="row d-flex  align-items-center justify-content-around">
-                    <div class="col-lg-3">
+                    <div class="col-lg-5">
                         <label for="">Fecha Inicio</label>
                         <input type="date" name="fechai" id="fecha_inicio" class="form-control">
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-5">
                         <label for="">Fecha Fin</label>
                         <input type="date" name="fechaf" id="fecha_fin" class="form-control">
                     </div>
                     <div class="col-lg-2">
                        &nbsp;
-                        <button class="btn btn-primary" style="width:100%" onclick="listar_tramite()"><i class="glyphicon glyphicon-search"> </i> Buscar</button>
+                        <button class="btn btn-primary" style="width:100%" onclick="listar_tramites_enviados()"><i class="glyphicon glyphicon-search"> </i> Buscar</button>
                     </div>
-                    <div class="col-lg-2">
-                       &nbsp;
-                       <button class="btn btn-primary" style="width: 100%;" onclick="">Nuevo</button>
-                    </div>
-                </div>
-                <div class="row">
-
+                    
                 </div>
                 <div class="row mt-3">
-                    <div class="col-12">
+                    <div class="col-10">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control global_filter" id="global_filter">
                             <div class="input-group-prepend">
@@ -37,16 +31,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-2">
+                     
+                       <button class="btn btn-primary" style="width: 100%;" onclick="">Nuevo</button>
+                    </div>
                 </div>
-                <table id="tabla_scan" class="display responsive table" style="width:100%">
+                <table id="tabla_tramite_enviado" class="display responsive table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Nro Seguimiento</th>
                             <th>Nro Doc</th>
                             <th>Tipo Doc</th>
-                            <th>Asunto</th>
-                            <th>fecha de registro</th>
-                            <th>Acciones</th>
+                            <th>Aréa Origen</th>
+                            <th>Aréa Localizado</th>
+                            <th>Mas Datos</th>
+                            <th>Seguimiento</th>
+                            <th>Estado Documento</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,6 +60,7 @@
 <div class="modal fade" id="modal_mdatos" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+
             <div class="modal-body">
                 <div class="card">
                     <div class="card-header">
@@ -96,6 +97,6 @@
 
 <script>
     fechadefault()
-    listar_tramites_guardados()
+    listar_tramites_enviados()
 
 </script>
