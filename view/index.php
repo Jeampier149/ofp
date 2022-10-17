@@ -149,7 +149,7 @@ if (!isset($_SESSION['S_ID'])) {
               <a href="index.html" class="nav-link "><i class="fas fa-fire"></i><span>INICIO</span></a>
             </li>
             <li class="menu-header">Secciones</li>
-            <?php if ($_SESSION['S_AREA'] == 6) { ?>
+            <?php if ($_SESSION['S_AREA'] == 6 || $_SESSION['S_ROL'] == 'Administrador') { ?>
               <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                   <span>Remuneraciones</span></a>
@@ -157,10 +157,11 @@ if (!isset($_SESSION['S_ID'])) {
                 <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_area.php')">Bandeja de documentos</a></li>
                 <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','tramite_enviado.php')">Documentos Enviados</a></li>
                 <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','scandoc.php')">Documentos Guardados</a></li>
+                <li><a class="nav-link" onclick="cargar_contenido('contenido_principal','resumen/resumen.php')">Resumen</a></li>
                 </ul>
               </li>
             <?php } ?>
-            <?php if ($_SESSION['S_AREA'] == '4') { ?>
+            <?php if ($_SESSION['S_AREA'] == '4' || $_SESSION['S_ROL'] == 'Administrador') { ?>
               <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                   <span>Programacion</span></a>
@@ -171,7 +172,7 @@ if (!isset($_SESSION['S_ID'])) {
                 </ul>
               </li>
             <?php } ?>
-            <?php if ($_SESSION['S_AREA'] == 2) { ?>
+            <?php if ($_SESSION['S_AREA'] == 2 || $_SESSION['S_ROL'] == 'Administrador') { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                 <span>Oficina Administrativa</span></a>
@@ -183,7 +184,7 @@ if (!isset($_SESSION['S_ID'])) {
             </li>
             <?php } ?>
 
-            <?php if ($_SESSION['S_AREA'] == 1) { ?>
+            <?php if ($_SESSION['S_AREA'] == 1 || $_SESSION['S_ROL'] == 'Administrador') { ?>
               <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                   <span>Bienestar</span></a>
@@ -196,7 +197,7 @@ if (!isset($_SESSION['S_ID'])) {
               </li>
             <?php } ?>
 
-            <?php if ($_SESSION['S_AREA'] == 5) { ?>
+            <?php if ($_SESSION['S_AREA'] == 5 || $_SESSION['S_ROL'] == 'Administrador') { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                 <span>Seguridad y Salud</span></a>
